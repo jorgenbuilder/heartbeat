@@ -1,0 +1,35 @@
+{
+  "canisters": {
+    "heartbeat": {
+      "main": "src/heartbeat/main.mo",
+      "type": "motoko"
+    },
+    "heartbeat_assets": {
+      "dependencies": [
+        "heartbeat"
+      ],
+      "frontend": {
+        "entrypoint": "src/heartbeat_assets/src/index.html"
+      },
+      "source": [
+        "src/heartbeat_assets/assets",
+        "dist/heartbeat_assets/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "dfx": "0.8.0",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    }
+  },
+  "version": 1
+}

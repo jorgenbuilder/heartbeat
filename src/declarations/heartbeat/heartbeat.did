@@ -1,0 +1,5 @@
+service : {
+  canister_heartbeat: () -> ();
+  count: () -> (nat);
+  getCount: () -> (nat);
+}
