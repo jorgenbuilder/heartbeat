@@ -6,31 +6,34 @@ actor {
     stable var counter : Nat = 0;
     stable var lastCron : Int = 0;
 
-    public func count () : async Nat {
-        counter := counter + 1;
-        counter;
-    };
-
     public func getCount () : async Nat {
         counter;
     };
 
     public func canister_heartbeat () : async () {
+        // Tested this method on mainnet and local: it doesn't do anything.
+        // Instead, we'll call this from the frontend and debounce it.
+        // FYI making this a query func breaks it.
         Debug.print("Thump thump");
-        // Pretty sure this doesn't do anything yet
-        // Instead, we'll call this from the frontend and debounce it
-        await cron();
+        cron();
+    };
+    
+    func count () : Nat {
+        counter := counter + 1;
+        counter;
     };
 
-    private func cron () : async () {
-        let interval : Int = 1 * 60 * Float.toInt(1e9);  // 1 minute in nano seconds
+    private func cron () : () {
+        // Debounce requests based on desired interval.
+        let interval : Int = 1 * 60 * Float.toInt(1e9); // 1 minute in nano seconds.
         let now = Time.now();
         if (now - lastCron < interval) {
             return;
         };
+        // Run our tasks.
         Debug.print("Run crons");
         lastCron := now;
-        ignore await count();
+        ignore count();
     };
 
 };

@@ -12,3 +12,9 @@ dfx deploy
 ```
 
 Then open it up in chrome.
+
+Running on mainnet here: https://icyrf-qqaaa-aaaah-qax2a-cai.raw.ic0.app/
+
+**Note:**
+
+I'm a little concerned about the time travel that can appear to happen between systems in a subnet. Let's keep an eye on that.
